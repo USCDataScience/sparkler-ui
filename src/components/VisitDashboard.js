@@ -1,0 +1,14 @@
+import React, { Component } from 'react';
+import {Col, Container, Row} from "react-grid-system";
+
+
+class VisitDashboard extends Component {
+
+    render(){
+        return(
+            <div/>
+        )
+    }
+}
+
+export default VisitDashboard

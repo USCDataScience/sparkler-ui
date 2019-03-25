@@ -6,6 +6,8 @@
     "@blueprintjs/core": "^3.14.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-grid-system": "^4.4.3",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
