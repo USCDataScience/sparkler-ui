@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Home from './Home'
 
 class Main extends Component {
@@ -7,9 +7,11 @@ class Main extends Component {
         return (
             <div>
                 <main>
+                    <BrowserRouter>
                     <Switch>
                         <Route exact path='/' component={Home}/>
                     </Switch>
+                    </BrowserRouter>
                 </main>
             </div>
         );
