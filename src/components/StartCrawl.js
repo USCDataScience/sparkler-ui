@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Col, Container, Row} from "react-grid-system";
 import {AnchorButton, H5} from "@blueprintjs/core";
 
 

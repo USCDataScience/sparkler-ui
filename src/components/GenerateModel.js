@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Col, Container, Row} from "react-grid-system";
 import {FormGroup, H5, InputGroup} from "@blueprintjs/core";
 import {INTENT_PRIMARY} from "@blueprintjs/core/lib/cjs/common/classes";
 
