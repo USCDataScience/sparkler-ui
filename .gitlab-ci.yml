@@ -16,21 +16,20 @@ cache:
   paths:
   - node_modules/
 
+services:
+  - docker:dind
+
+
+
 test_async:
   stage: build
   image: node:10
   script:
    - npm install
 
-
-
-services:
-  - docker:dind
-
-before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-
 build-master:
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
@@ -39,6 +38,8 @@ build-master:
     - master
 
 build:
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
