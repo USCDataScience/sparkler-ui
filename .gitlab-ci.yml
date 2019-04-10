@@ -207,7 +207,7 @@ deploy:
   script:
     - kubectl config set-cluster juju-cluster --server="${SERVER}"
     - kubectl config set clusters.k8s.certificate-authority-data ${CERTIFICATE_AUTHORITY_DATA}
-    - kubectl config set-credentials admin --password="${USER_TOKEN}"
+    - kubectl config set-credentials admin --password="${USER_TOKEN}" --username="admin"
     - kubectl config set-context juju-context --cluster=juju-cluster --user=admin
     - kubectl config use-context juju-context
     - kubectl -n sce --insecure-skip-tls-verify apply -f deployment.yaml
