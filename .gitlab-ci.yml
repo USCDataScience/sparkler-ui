@@ -210,5 +210,5 @@ deploy:
     - kubectl config set-credentials admin --password="${USER_TOKEN}" --username="admin"
     - kubectl config set-context juju-context --cluster=juju-cluster --user=admin
     - kubectl config use-context juju-context
-    - kubectl delete -n sce deployment --ignore-not-found=true sce-ui
+    - kubectl delete --insecure-skip-tls-verify -n sce deployment --ignore-not-found=true sce-ui
     - kubectl -n sce --insecure-skip-tls-verify apply -f deployment.yaml
