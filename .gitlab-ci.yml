@@ -210,4 +210,4 @@ deploy:
     - kubectl config set-credentials admin --password="${USER_TOKEN}"
     - kubectl config set-context default --cluster=k8s --user=admin
     - kubectl config use-context default
-    - kubectl apply -f deployment.yaml
+    - kubectl -n sce apply -f deployment.yaml
