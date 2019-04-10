@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {FormGroup, H5, Icon, InputGroup} from "@blueprintjs/core";
 import {INTENT_PRIMARY} from "@blueprintjs/core/lib/cjs/common/classes";
+import {fetchNewTime} from "../actions";
+import {connect} from "react-redux";
 
 class GenerateModel extends Component {
 
@@ -28,7 +30,7 @@ class GenerateModel extends Component {
                     <H5>Minimum 10 Each</H5>
                     <span>5 <button className={"btn-circle btn-padding green"}><Icon icon={"heart"} iconSize={Icon.SIZE_LARGE}/></button></span>
                     <span>4 <button className={"btn-circle btn-padding amber"}><Icon icon={"tick"} iconSize={Icon.SIZE_LARGE}/></button></span>
-                    <span>3 <button className={"btn-circle btn-padding red"}><Icon icon={"minus"} iconSize={Icon.SIZE_LARGE}/></button></span>
+                    <span>3 <button className={"btn-circle btn-padding red"} onClick={this.props.updateTime}><Icon icon={"minus"} iconSize={Icon.SIZE_LARGE}/></button></span>
                 </div>
                 <div>
                     <H5>Other Options</H5>
@@ -42,4 +44,8 @@ class GenerateModel extends Component {
     }
 }
 
-export default GenerateModel
+const mapDispatchToProps = dispatch => ({
+    updateTime: () => dispatch(fetchNewTime())
+})
+
+export default connect(null, mapDispatchToProps)(GenerateModel);

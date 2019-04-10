@@ -1,3 +1,5 @@
+import * as types from '../reducers/types';
+
 import axios from 'axios';
 //var Database = require('arangojs').Database;
 
@@ -52,3 +54,25 @@ export const fetchAllModels = () => {
         return "hello"
     }
 }
+
+export const searchWebsites = () => {
+    return (dispatch) => {
+
+    }
+}
+
+
+export const fetchNewTime = () => ({
+    type: types.FETCH_NEW_TIME,
+    payload: new Date().toString(),
+})
+
+/*
+export const login = (user) => ({
+    type: types.LOGIN,
+    payload: user
+})
+
+export const logout = () => ({
+    type: types.LOGOUT,
+})*/
