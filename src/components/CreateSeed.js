@@ -8,7 +8,7 @@ class CreateSeed extends Component {
         return(
             <div>
             <H5>Create Seed File</H5>
-            <AnchorButton text="Upload Seed File" />
+            <AnchorButton icon={"import"} text="Upload Seed File" />
             </div>
         )
     }

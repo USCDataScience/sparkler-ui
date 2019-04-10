@@ -8,7 +8,7 @@ class StartCrawl extends Component {
         return(
             <div>
                 <H5>Start the Crawl</H5>
-                <AnchorButton text="Start Crawler" />
+                <AnchorButton icon={"time"} text="Start Crawler" />
             </div>
         )
     }

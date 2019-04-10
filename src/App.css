@@ -35,3 +35,34 @@
     transform: rotate(360deg);
   }
 }
+
+.btn-circle {
+
+  width: 30px;
+  height: 30px;
+  padding: 6px 0;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.428571429;
+
+}
+
+.green{
+  background-color: #0d8050;
+  color: whitesmoke;
+}
+
+.amber{
+  background-color: #bf7326;
+  color: whitesmoke;
+}
+
+.red{
+  background-color: #c23030;
+  color: whitesmoke;
+}
+
+.btn-padding{
+  margin: 5px;
+}

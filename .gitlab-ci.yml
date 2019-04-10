@@ -19,8 +19,6 @@ cache:
 services:
   - docker:dind
 
-
-
 test_async:
   stage: build
   image: node:10
