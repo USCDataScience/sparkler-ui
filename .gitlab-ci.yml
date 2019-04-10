@@ -205,9 +205,9 @@ deploy:
   stage: deploy
   image: dtzar/helm-kubectl
   script:
-    - kubectl config set-cluster k8s --server="${SERVER}"
+    - kubectl config set-cluster juju-cluster --server="${SERVER}"
     - kubectl config set clusters.k8s.certificate-authority-data ${CERTIFICATE_AUTHORITY_DATA}
     - kubectl config set-credentials admin --password="${USER_TOKEN}"
-    - kubectl config set-context default --cluster=k8s --user=admin
-    - kubectl config use-context default
+    - kubectl config set-context juju-context --cluster=juju-cluster --user=admin
+    - kubectl config use-context juju-context
     - kubectl -n sce apply -f deployment.yaml
