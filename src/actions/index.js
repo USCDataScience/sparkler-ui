@@ -66,7 +66,7 @@ export const searchWebsites = (search_term) => {
         axios.get("/search/" + search_term)
             .then(response => {
                 debugger;
-                let jdata = JSON.parse(response.data);
+                let jdata = response.data;
 
                 response = {
                     type: types.SEARCH_RESULTS,
