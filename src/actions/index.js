@@ -55,18 +55,31 @@ export const fetchAllModels = () => {
     }
 }
 
-export const searchWebsites = () => {
-    return (dispatch) => {
-
-    }
-}
-
-
 export const fetchNewTime = () => ({
     type: types.FETCH_NEW_TIME,
     payload: new Date().toString(),
 })
 
+
+export const searchWebsites = (search_term) => {
+    return (dispatch) => {
+        axios.get("http://localhost:5000/search/" + search_term)
+            .then(response => {
+                debugger;
+                let jdata = JSON.parse(response.data);
+
+                response = {
+                    type: types.SEARCH_RESULTS,
+                    payload: jdata
+                };
+                dispatch(response)
+            })
+            .catch(error => {
+                throw(error);
+            })
+
+    }
+};
 /*
 export const login = (user) => ({
     type: types.LOGIN,
