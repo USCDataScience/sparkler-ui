@@ -9,7 +9,7 @@ class Main extends Component {
                 <main>
                     <BrowserRouter>
                     <Switch>
-                        <Route exact path='/' component={Home}/>
+                        <Route exact path='/explorer' component={Home}/>
                     </Switch>
                     </BrowserRouter>
                 </main>
