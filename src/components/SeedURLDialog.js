@@ -9,17 +9,25 @@ class SeedURLDialog extends Component{
         this.state = {
             value: ''
         }
+        this.handleChange = this.handleChange.bind(this);
+
     }
 
     handleClose = () => this.setState({ isOpen: false });
     handleOpen = () => this.setState({ isOpen: true });
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
 
+    handleOkay(event) {
+
+    }
 
 
     render(){
         return(
         <Dialog
-            icon="info-sign"
+            icon="search-text"
             onClose={this.handleClose}
             title="Seed URLs"
             {...this.state}
@@ -39,13 +47,12 @@ class SeedURLDialog extends Component{
                     <Tooltip content="This button is hooked up to close the dialog.">
                         <Button onClick={this.handleClose}>Cancel</Button>
                     </Tooltip>
-                    <AnchorButton
+                    <Button
                         intent={Intent.PRIMARY}
-                        href="https://www.palantir.com/palantir-foundry/"
-                        target="_blank"
+                        onClick={this.handleOkay}
                     >
                        Save
-                    </AnchorButton>
+                    </Button>
                 </div>
             </div>
         </Dialog>

@@ -4,6 +4,7 @@ import GenerateModel from "../components/GenerateModel";
 import CreateSeed from "../components/CreateSeed";
 import StartCrawl from "../components/StartCrawl";
 import {Divider} from "@blueprintjs/core";
+import Previews from "../components/Previews";
 
 
 class Home extends Component {
@@ -20,7 +21,7 @@ class Home extends Component {
                         <StartCrawl/>
                     </Col>
                     <Col sm={9}>
-                        Right
+                        <Previews/>
                     </Col>
                 </Row>
             </Container>

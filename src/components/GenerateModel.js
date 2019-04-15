@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button, FormGroup, H5, Icon, InputGroup} from "@blueprintjs/core";
 import {INTENT_PRIMARY} from "@blueprintjs/core/lib/cjs/common/classes";
-import {fetchNewTime, searchWebsites} from "../actions";
+import {fetchNewTime, searchWebsites, searchFired} from "../actions";
 import {connect} from "react-redux";
 
 class GenerateModel extends Component {
@@ -20,6 +20,11 @@ class GenerateModel extends Component {
         this.setState({searchterm: event.target.value});
     }
 
+    handleSearch(event){
+        this.props.searchTriggered();
+        this.props.searchWebsites(this.state.searchterm);
+    }
+
     render(){
         return(
             <div>
@@ -31,7 +36,7 @@ class GenerateModel extends Component {
                     label={"Search terms"}
                     labelFor={"text-input"}>
                     <InputGroup type="search" id="text-input" value={this.state.searchterm} onChange={this.handleChange} leftIcon="search" placeholder="Enter terms here" intent={this.state.intent} />
-                    <Button icon={"search"} style={{marginTop:"10px"}} onClick={() => this.props.searchWebsites(this.state.searchterm)}>Search</Button>
+                    <Button icon={"search"} style={{marginTop:"10px"}} onClick={() => this.handleSearch()}>Search</Button>
                 </FormGroup>
 
                 <div>
@@ -54,7 +59,8 @@ class GenerateModel extends Component {
 
 const mapDispatchToProps = dispatch => ({
     updateTime: () => dispatch(fetchNewTime()),
-    searchWebsites: (s) => dispatch(searchWebsites(s))
+    searchWebsites: (s) => dispatch(searchWebsites(s)),
+    searchTriggered: () => dispatch(searchFired(true))
 })
 
 export default connect(null, mapDispatchToProps)(GenerateModel);

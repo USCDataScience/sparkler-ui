@@ -61,11 +61,15 @@ export const fetchNewTime = () => ({
 })
 
 
+export const searchFired = (b) => ({
+    type: types.SEARCH_FIRED,
+    payload: b
+})
+
 export const searchWebsites = (search_term) => {
     return (dispatch) => {
-        axios.get("/search/" + search_term)
+        axios.get("https://sce-ui.spicule.co.uk/search/" + search_term)
             .then(response => {
-                debugger;
                 let jdata = response.data;
 
                 response = {
@@ -73,12 +77,28 @@ export const searchWebsites = (search_term) => {
                     payload: jdata
                 };
                 dispatch(response)
+            }).then(response => {
+                dispatch(searchFired(false))
             })
             .catch(error => {
                 throw(error);
             })
 
     }
+};
+
+export const saveSeedURLs = (model,urls) => {
+
+    return (dispatch) => {
+        axios.post(model+"/seeds", urls)
+            .then(response => {
+                dispatch("saved")
+            })
+            .catch(error => {
+                throw(error);
+            })
+    }
+
 };
 /*
 export const login = (user) => ({
