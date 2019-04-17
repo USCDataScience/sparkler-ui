@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Card, Elevation, Classes, H5 } from "@blueprintjs/core";
+import {Button, Card, Classes, Elevation, H5} from "@blueprintjs/core";
 import Iframe from "react-iframe";
 import {Col, Container, Row} from "react-grid-system";
 import {connect} from "react-redux";

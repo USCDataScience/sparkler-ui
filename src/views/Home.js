@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Col, Container, Row} from "react-grid-system";
-import GenerateModel from "../components/GenerateModel";
-import CreateSeed from "../components/CreateSeed";
-import StartCrawl from "../components/StartCrawl";
+import GenerateModel from "../components/sidebar/GenerateModel";
+import CreateSeed from "../components/sidebar/CreateSeed";
+import StartCrawl from "../components/sidebar/StartCrawl";
 import {Divider} from "@blueprintjs/core";
 import Previews from "../components/Previews";
 

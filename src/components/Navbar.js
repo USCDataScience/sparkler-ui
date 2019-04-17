@@ -1,9 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {fetchNewTime} from "../actions";
+import ModelDialog from "./dialogs/ModelDialog";
 
 
 class Navbar extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.modalElement = React.createRef();
+
+    }
+
+    handle_models = () => this.modalElement.current.handleOpen();
 
     render(){
         return(
@@ -13,12 +23,10 @@ class Navbar extends Component {
                         <div className="bp3-navbar-heading">Domain Discovery - Seed Generation{/* - Current time: {this.props.currentTime}*/}</div>
                     </div>
                     <div className="bp3-navbar-group bp3-align-right">
-                        <button className="bp3-button bp3-minimal bp3-icon-home">Home</button>
-                        <button className="bp3-button bp3-minimal bp3-icon-document">Files</button>
-                        <span className="bp3-navbar-divider"></span>
-                        <button className="bp3-button bp3-minimal bp3-icon-user"></button>
-                        <button className="bp3-button bp3-minimal bp3-icon-notifications"></button>
-                        <button className="bp3-button bp3-minimal bp3-icon-cog"></button>
+                        <button className="bp3-button bp3-minimal bp3-icon-home">Explorer</button>
+                        <button className="bp3-button bp3-minimal bp3-icon-cog" onClick={this.handle_models}>Models
+                        </button>
+                        <ModelDialog ref={this.modalElement}/>
                     </div>
                 </div>
             </nav>

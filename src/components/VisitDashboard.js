@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import {Col, Container, Row} from "react-grid-system";
+import React, {Component} from 'react';
 
 
 class VisitDashboard extends Component {

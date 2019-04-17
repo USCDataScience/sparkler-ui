@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {AnchorButton, H5} from "@blueprintjs/core";
-import SeedURLDialog from "./SeedURLDialog";
+import SeedURLDialog from "../dialogs/SeedURLDialog";
 
 
 class CreateSeed extends Component {

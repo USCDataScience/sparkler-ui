@@ -1,7 +1,6 @@
 import * as types from './types';
 
 
-
 // Initial (starting) state
 const initialState = {
     currentTime: new Date().toString()

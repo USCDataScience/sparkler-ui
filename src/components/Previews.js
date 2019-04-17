@@ -7,12 +7,6 @@ import {Col, Container, Row} from "react-grid-system";
 class Previews extends Component{
 
 
-    constructor(props) {
-        super(props);
-
-
-    }
-
     render_nowebsites(){
         return(
             <Container>
