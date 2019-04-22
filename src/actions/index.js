@@ -50,7 +50,7 @@ collection.document('firstDocument').then(
 
 export const createNewModel = (name) => {
     return (dispatch) => {
-        axios.get("https://sce-ui.spicule.co.uk/explorer/classify/createnew/"+name)
+        axios.get("https://sce-ui.spicule.co.uk/explorer-api/classify/createnew/"+name)
             .then(response => {
                 response = {
                     type: types.NEW_MODEL,
