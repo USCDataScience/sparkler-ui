@@ -48,6 +48,18 @@ collection.document('firstDocument').then(
     err => console.error('Failed to fetch document:', err)
 );*/
 
+export const createNewModel = (name) => {
+    return (dispatch) => {
+        axios.get("https://sce-ui.spicule.co.uk/explorer/classify/createnew/"+name)
+            .then(response => {
+                response = {
+                    type: types.NEW_MODEL,
+                    payload: name
+                }
+                dispatch(response)
+            })
+    }
+}
 export const fetchAllModels = () => {
 
     return (dispatch) => {

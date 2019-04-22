@@ -3,7 +3,7 @@ import {Button, Classes, Dialog, Tab, Tabs} from "@blueprintjs/core";
 import ListModels from "../panels/ListModels";
 import NewModel from "../panels/NewModel";
 
-class SeedURLDialog extends Component{
+class ModelDialog extends Component{
 
     constructor(props) {
         super(props);
@@ -48,4 +48,5 @@ class SeedURLDialog extends Component{
 
 }
 
-export default SeedURLDialog
+
+export default ModelDialog
