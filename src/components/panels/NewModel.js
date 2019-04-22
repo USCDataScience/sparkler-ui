@@ -19,7 +19,6 @@ class NewModel extends Component {
     }
 
     handleSubmit = function(e){
-        e.preventDefault();
         this.props.createNewModel(this.state.model)
 
     };
