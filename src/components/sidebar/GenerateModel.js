@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, FormGroup, H5, H6, Icon, InputGroup} from "@blueprintjs/core";
 import {INTENT_PRIMARY} from "@blueprintjs/core/lib/cjs/common/classes";
-import {fetchNewTime, searchFired, searchWebsites} from "../../actions";
+import {fetchNewTime, searchFired, searchWebsites, updateModel} from "../../actions";
 import {connect} from "react-redux";
 
 class GenerateModel extends Component {
@@ -13,7 +13,13 @@ class GenerateModel extends Component {
         this.state['intent'] = INTENT_PRIMARY;
         this.state['searchterm'] = ""
         this.handleChange = this.handleChange.bind(this);
+        this.generateUpdateModel = this.generateUpdateModel.bind(this)
 
+    }
+
+    generateUpdateModel(){
+        debugger;
+        this.props.updateModel(this.props.current_model, this.props.annotations)
     }
 
     handleChange(event) {
@@ -21,8 +27,13 @@ class GenerateModel extends Component {
     }
 
     handleSearch(event){
-        this.props.searchTriggered();
-        this.props.searchWebsites(this.state.searchterm);
+        if(this.props.current_model) {
+            this.props.searchTriggered();
+            this.props.searchWebsites(this.props.current_model, this.state.searchterm);
+        }
+        else{
+            alert("Please Select a Model")
+        }
     }
 
     render(){
@@ -38,7 +49,7 @@ class GenerateModel extends Component {
                     <InputGroup id={"searchterms"} type="search" value={this.state.searchterm}
                                 onChange={this.handleChange} leftIcon="search" placeholder="Enter terms here"
                                 intent={this.state.intent}/>
-                    <Button onClick={() => this.handleSearch()}>Go!</Button>
+                    <Button disabled={!this.props.current_model} onClick={() => this.handleSearch()}>Go!</Button>
                 </FormGroup>
 
                 <div>
@@ -58,8 +69,7 @@ class GenerateModel extends Component {
 
                 </div>
                 <div>
-                    <H6>Other Options</H6>
-                    <span><Button icon={"export"}>Export Model</Button></span>
+                    <span><Button onClick={this.generateUpdateModel} disabled={!this.props.current_model} icon={"export"}>Update Model</Button></span>
                 </div>
             </div>
         )
@@ -68,8 +78,17 @@ class GenerateModel extends Component {
 
 const mapDispatchToProps = dispatch => ({
     updateTime: () => dispatch(fetchNewTime()),
-    searchWebsites: (s) => dispatch(searchWebsites(s)),
-    searchTriggered: () => dispatch(searchFired(true))
+    searchWebsites: (m,s) => dispatch(searchWebsites(m,s)),
+    searchTriggered: () => dispatch(searchFired(true)),
+    updateModel: (m ,a) => dispatch(updateModel(m, a))
 })
 
-export default connect(null, mapDispatchToProps)(GenerateModel);
+const mapStateToProps = state => {
+    return {
+        current_model: state.modelreducer.current_model,
+        annotations: state.modelreducer.updated_relevancy,
+        model_stats: state.modelreducer.model_stats
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GenerateModel);

@@ -6,6 +6,7 @@
     "@blueprintjs/core": "^3.14.1",
     "arangojs": "5",
     "axios": "^0.18.0",
+    "location-origin": "^1.1.4",
     "nano": "^8.0.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",

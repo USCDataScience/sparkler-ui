@@ -7,7 +7,7 @@ import {Col, Container, Row} from "react-grid-system";
 class Previews extends Component{
 
 
-    render_nowebsites(){
+    static render_nowebsites(){
         return(
             <Container>
                 <Row>
@@ -61,16 +61,16 @@ class Previews extends Component{
         )
     }
 
-    listToMatrix(list, elementsPerSubArray) {
+    static listToMatrix(list, elementsPerSubArray) {
         var matrix = [], i, k;
 
         for (i = 0, k = -1; i < list.length; i++) {
             if (i % elementsPerSubArray === 0) {
                 k++;
-                matrix[k] = [];
+                matrix[k] = [{pos:i+1, obj: {url:"", title: ""}}];
             }
 
-            matrix[k].push(list[i]);
+            matrix[k].push({pos:i+1, obj: list[i]});
         }
 
         return matrix;
@@ -79,11 +79,11 @@ class Previews extends Component{
 //var marker = get_marker(jdata[i - 1]['label']);
     render_websites() {
         let arr = [];
-        let matrix  = this.listToMatrix(this.props.websites, 3)
+        let matrix  = Previews.listToMatrix(this.props.websites, 3)
         for(let i=0; i< matrix.length; i++){
-            arr.push(<Row ><Col sm={4}><IFrameFrame url={matrix[i][0].url} title={matrix[i][0].title}/></Col>
-                <Col sm={4}><IFrameFrame url={matrix[i][1].url} title={matrix[i][1].title}/>
-                </Col><Col sm={4}><IFrameFrame url={matrix[i][2].url} title={matrix[i][2].title}/></Col>
+            arr.push(<Row ><Col sm={4}><IFrameFrame iframe={"page"+matrix[i][1].pos+"-ann"} url={matrix[i][1].obj.url} title={matrix[i][1].obj.title}/></Col>
+                <Col sm={4}><IFrameFrame iframe={"page"+matrix[i][2].pos+"-ann"} url={matrix[i][2].obj.url} title={matrix[i][2].obj.title}/>
+                </Col><Col sm={4}><IFrameFrame iframe={"page"+matrix[i][3].pos+"-ann"} url={matrix[i][3].obj.url} title={matrix[i][3].obj.title}/></Col>
             </Row>)
         }
         return arr;
@@ -92,7 +92,7 @@ class Previews extends Component{
 
     render(){
         if(this.props.running){
-            return(this.render_nowebsites())
+            return(Previews.render_nowebsites())
         }
         else if(this.props.websites===undefined){
             return(<div/>)

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Classes, Dialog, Tab, Tabs} from "@blueprintjs/core";
 import ListModels from "../panels/ListModels";
 import NewModel from "../panels/NewModel";
+import {connect} from "react-redux";
 
 class ModelDialog extends Component{
 
@@ -13,6 +14,14 @@ class ModelDialog extends Component{
         this.handleChange = this.handleChange.bind(this);
 
     }
+
+    componentDidUpdate(oldProps) {
+        const newProps = this.props
+        if(oldProps.current_model !== newProps.current_model) {
+            this.handleClose()
+        }
+    }
+
 
     handleClose = () => this.setState({ isOpen: false });
     handleOpen = () => this.setState({ isOpen: true });
@@ -48,5 +57,10 @@ class ModelDialog extends Component{
 
 }
 
+const mapStateToProps = state => {
+    return {
+        current_model: state.modelreducer.current_model
+    }
+}
 
-export default ModelDialog
+export default connect(mapStateToProps, null, null, {forwardRef: true})(ModelDialog)

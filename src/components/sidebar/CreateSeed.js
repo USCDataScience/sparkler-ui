@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {AnchorButton, H5} from "@blueprintjs/core";
 import SeedURLDialog from "../dialogs/SeedURLDialog";
+import {connect} from "react-redux";
 
 
 class CreateSeed extends Component {
@@ -20,11 +21,17 @@ class CreateSeed extends Component {
         return(
             <div>
             <H5>Create Seed File</H5>
-            <AnchorButton icon={"import"} onClick={this.handleOpen} text="Paste Seed URLs" />
+            <AnchorButton disabled={!this.props.current_model} icon={"import"} onClick={this.handleOpen} text="Paste Seed URLs" />
             <SeedURLDialog ref={this.modalElement}/>
             </div>
         )
     }
 }
 
-export default CreateSeed
+const mapStateToProps = state => {
+    return {
+        current_model: state.modelreducer.current_model
+    }
+}
+
+export default connect(mapStateToProps)(CreateSeed)

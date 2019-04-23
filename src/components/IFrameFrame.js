@@ -3,6 +3,7 @@ import {Button, Card, Classes, Elevation, H5} from "@blueprintjs/core";
 import Iframe from "react-iframe";
 import {Col, Container, Row} from "react-grid-system";
 import {connect} from "react-redux";
+import {setRelevancy} from "../actions";
 
 class IFrameFrame extends Component{
 
@@ -16,6 +17,13 @@ class IFrameFrame extends Component{
             skeleton: true
 
         }
+        this.updaterelevancy = this.updaterelevancy.bind(this);
+
+    }
+
+    updaterelevancy = function(val){
+        debugger;
+        this.props.setRelevancy(this.props.iframe, val)
     }
 
     render() {
@@ -37,7 +45,9 @@ class IFrameFrame extends Component{
 
                 <Row>
                     <Col sm={12}>
-                    <Button className={this.props.skeleton ? Classes.SKELETON : ''}>Submit</Button>
+                        <Button onClick={() => this.updaterelevancy(2)} className={this.props.skeleton ? Classes.SKELETON : ''}>Highly Relevant</Button>
+                        <Button onClick={() => this.updaterelevancy(1)} className={this.props.skeleton ? Classes.SKELETON : ''}>Relevant</Button>
+                        <Button onClick={() => this.updaterelevancy(0)} className={this.props.skeleton ? Classes.SKELETON : ''}>Not Relevant</Button>
                     </Col>
                 </Row>
             </Container>
@@ -53,5 +63,10 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps = dispatch => ({
+    setRelevancy: (a, v) => dispatch(setRelevancy(a,v))
+})
 
-export default connect(mapStateToProps)(IFrameFrame)
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(IFrameFrame)

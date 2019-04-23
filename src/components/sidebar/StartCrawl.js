@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {AnchorButton, H5} from "@blueprintjs/core";
+import {connect} from "react-redux";
 
 
 class StartCrawl extends Component {
@@ -8,10 +9,16 @@ class StartCrawl extends Component {
         return(
             <div>
                 <H5>Start the Crawl</H5>
-                <AnchorButton icon={"time"} text="Start Crawler" />
+                <AnchorButton disabled={!this.props.current_model} icon={"time"} text="Start Crawler" />
             </div>
         )
     }
 }
 
-export default StartCrawl
+const mapStateToProps = state => {
+    return {
+        current_model: state.modelreducer.current_model
+    }
+}
+
+export default connect(mapStateToProps)(StartCrawl)

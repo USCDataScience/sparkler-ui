@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Classes, Dialog, Intent, TextArea, Tooltip} from "@blueprintjs/core";
+import {saveSeedURLs} from "../../actions";
+import {connect} from "react-redux";
 
 class SeedURLDialog extends Component {
 
@@ -10,6 +12,8 @@ class SeedURLDialog extends Component {
             value: ''
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleOkay = this.handleOkay.bind(this);
+
 
     }
 
@@ -20,8 +24,8 @@ class SeedURLDialog extends Component {
         this.setState({value: event.target.value});
     }
 
-    handleOkay(event) {
-
+    handleOkay() {
+        this.props.saveSeedURLs(this.props.current_model, this.state.value)
     }
 
 
@@ -62,4 +66,14 @@ class SeedURLDialog extends Component {
 
 }
 
-export default SeedURLDialog
+const mapDispatchToProps = dispatch => ({
+    saveSeedURLs: (m,s) => dispatch(saveSeedURLs(m,s))
+})
+
+const mapStateToProps = state => {
+    return {
+        current_model: state.modelreducer.current_model
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, null, {forwardRef: true})(SeedURLDialog)

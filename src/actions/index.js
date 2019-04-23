@@ -1,5 +1,5 @@
 import * as types from '../reducers/types';
-
+import * as env from '../utils/constants'
 import axios from 'axios';
 //var Database = require('arangojs').Database;
 
@@ -50,7 +50,7 @@ collection.document('firstDocument').then(
 
 export const createNewModel = (name) => {
     return (dispatch) => {
-        axios.get("https://sce-ui.spicule.co.uk/explorer-api/classify/createnew/"+name)
+        axios.get(env.API_URL+"/explorer-api/classify/createnew/"+name)
             .then(response => {
                 response = {
                     type: types.NEW_MODEL,
@@ -60,13 +60,49 @@ export const createNewModel = (name) => {
             })
     }
 }
-export const fetchAllModels = () => {
 
+export const updateModel = (name, annotations) => {
     return (dispatch) => {
-        return "hello"
+        axios.post(env.API_URL+"/explorer-api/classify/update/"+name, annotations)
+            .then(response => {
+                response = {
+                    type: types.MODEL_STATS,
+                    payload: response.data
+                }
+                debugger;
+                dispatch(response)
+            })
+    }
+}
+export const fetchAllModels = () => {
+    return (dispatch) => {
+        axios.get(env.API_URL+"/explorer-api/classify/listmodels")
+            .then(response => {
+                response = {
+                    type: types.MODEL_LIST,
+                    payload: response.data
+                }
+                dispatch(response)
+            })
     }
 }
 
+export const enableModel = (name) => {
+    return (dispatch) => {
+        try {
+            const serializedState = JSON.stringify({current_model: name});
+            localStorage.setItem('state', serializedState);
+        } catch {
+            // ignore write errors
+        }
+        let response = {
+            type: types.ENABLE_MODEL,
+            payload: name
+
+        };
+        dispatch(response)
+    }
+}
 export const fetchNewTime = () => ({
     type: types.FETCH_NEW_TIME,
     payload: new Date().toString(),
@@ -78,10 +114,9 @@ export const searchFired = (b) => ({
     payload: b
 })
 
-export const searchWebsites = (search_term) => {
+export const searchWebsites = (model, search_term) => {
     return (dispatch) => {
-        axios.get("https://sce-ui.spicule.co.uk/search/test3/" + search_term)
-        //axios.get("http://localhost:5000/search/test3/" + search_term)
+        axios.get(env.API_URL+"/search/"+model+"/" + search_term)
             .then(response => {
                 let jdata = response.data;
 
@@ -103,9 +138,14 @@ export const searchWebsites = (search_term) => {
 export const saveSeedURLs = (model,urls) => {
 
     return (dispatch) => {
-        axios.post(model+"/seeds", urls)
+        axios.post(env.API_URL+'/explorer-api/cmd/seed/upload/'+model, urls)
             .then(response => {
-                dispatch("saved")
+                response = {
+                    type: types.UPDATE_SEED_URLS,
+                    payload: urls
+
+                }
+                dispatch(response)
             })
             .catch(error => {
                 throw(error);
@@ -113,6 +153,33 @@ export const saveSeedURLs = (model,urls) => {
     }
 
 };
+
+export const modelStats = (model) => {
+    return (dispatch) => {
+        axios.get(env.API_URL+'/explorer-api/classify/stats/'+model)
+            .then(response => {
+                response = {
+                    type: types.MODEL_STATS,
+                    payload: response.data
+                }
+
+                dispatch(response)
+            })
+    }
+}
+
+let relevancy = {"page1-ann":0,"page2-ann":0,"page3-ann":0,"page4-ann":0,"page5-ann":0,"page6-ann":0,"page7-ann":0,"page8-ann":0,"page9-ann":0,"page10-ann":0,"page11-ann":0,"page12-ann":0,};
+export const setRelevancy = (frame, val) => {
+    return (dispatch) => {
+        relevancy[frame] = val;
+        console.log(relevancy);
+        let response = {
+            type: types.UPDATED_RELEVANCY,
+            payload: relevancy
+        }
+        dispatch(response)
+    }
+}
 /*
 export const login = (user) => ({
     type: types.LOGIN,

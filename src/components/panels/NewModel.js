@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Card, InputGroup} from "@blueprintjs/core";
 import {FormGroup} from "@blueprintjs/core/lib/cjs";
 import {INTENT_PRIMARY} from "@blueprintjs/core/lib/cjs/common/classes";
-import {createNewModel, fetchNewTime, searchFired, searchWebsites} from "../../actions";
+import {createNewModel} from "../../actions";
 import {connect} from "react-redux";
 
 class NewModel extends Component {
