@@ -18,7 +18,6 @@ class SeedURLDialog extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger;
         if(this.props.seed_urls !== prevProps.seed_urls){
             this.handleClose()
         }
