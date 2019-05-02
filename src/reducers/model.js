@@ -14,6 +14,8 @@ const modelReducer = (state = [], action) => {
             return { ...state, seed_urls: action.payload};
         case types.MODEL_STATS:
             return { ...state, model_stats: action.payload};
+        case types.CRAWL_STARTED:
+            return { ...state, crawl: action.payload}
         default:
             return state;
     }

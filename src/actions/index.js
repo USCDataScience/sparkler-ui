@@ -180,6 +180,20 @@ export const setRelevancy = (frame, val) => {
         dispatch(response)
     }
 }
+
+
+export const startCrawl = (model) => {
+    return (dispatch) => {
+        axios.post(env.API_URL+'/explorer-api/cmd/crawler/crawl/'+model)
+            .then( response => {
+                response = {
+                    type: types.CRAWL_STARTED,
+                    payload: model
+                }
+                }
+            )
+    }
+}
 /*
 export const login = (user) => ({
     type: types.LOGIN,

@@ -17,8 +17,13 @@ class GenerateModel extends Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.model_stats !== this.props.model_stats) {
+            alert("Model Updated")
+        }
+    }
+
     generateUpdateModel(){
-        debugger;
         this.props.updateModel(this.props.current_model, this.props.annotations)
     }
 

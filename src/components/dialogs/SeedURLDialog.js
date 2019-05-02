@@ -17,6 +17,13 @@ class SeedURLDialog extends Component {
 
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        debugger;
+        if(this.props.seed_urls !== prevProps.seed_urls){
+            this.handleClose()
+        }
+    }
+
     handleClose = () => this.setState({isOpen: false});
     handleOpen = () => this.setState({isOpen: true});
 
@@ -72,7 +79,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => {
     return {
-        current_model: state.modelreducer.current_model
+        current_model: state.modelreducer.current_model,
+        seed_urls: state.modelreducer.seed_urls
     }
 }
 
