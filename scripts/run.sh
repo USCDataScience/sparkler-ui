@@ -1,2 +1,2 @@
 #!/bin/bash
-exec npm run start && apachectl -D FOREGROUND
+exec npm run start & apachectl -D FOREGROUND
