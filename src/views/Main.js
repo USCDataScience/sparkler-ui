@@ -8,9 +8,9 @@ class Main extends Component {
         return (
             <div>
                 <main>
-                    <BrowserRouter>
+                    <BrowserRouter basename="/explorer">
                     <Switch>
-                        <Route exact path='/explorer' component={Home}/>
+                        <Route exact path='/' component={Home}/>
                         <Route exact path='/analytics' component={BananaFrame}/>
                     </Switch>
                     </BrowserRouter>
