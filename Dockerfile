@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 COPY scripts/run.sh /
+COPY scripts/000-default.conf /etc/apache2/sites-available/
 
 RUN npm ci --only=production && apt update && apt install -y apache2 && chmod +x /run.sh
 
