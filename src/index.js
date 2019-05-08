@@ -19,7 +19,7 @@ function configureStore(initialState) {
 
 render((
     <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/explorer">
         <App />
     </BrowserRouter>
     </Provider>

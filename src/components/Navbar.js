@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {fetchNewTime} from "../actions";
 import ModelDialog from "./dialogs/ModelDialog";
 import {RouterButton} from "./RouterButton";
-import {withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 
 class Navbar extends Component {
@@ -27,9 +27,9 @@ class Navbar extends Component {
                         <div className="bp3-navbar-heading">Domain Discovery - Seed Generation{/* - Current time: {this.props.currentTime}*/}</div>
                     </div>
                     <div className="bp3-navbar-group bp3-align-right">
-                        <RouterButton label="Explorer" activeOnlyWhenExact={true} history={history} to={"/explorer"} className="bp3-button bp3-minimal bp3-icon-home">Explorer</RouterButton>
+                        <RouterButton label="Explorer" activeOnlyWhenExact={false} history={history} to={"/"} className="bp3-button bp3-minimal bp3-icon-home">Explorer</RouterButton>
                         <button className="bp3-button bp3-minimal bp3-icon-cog" onClick={this.handle_models}>Models</button>
-                        <RouterButton label="Analytics" activeOnlyWhenExact={true} history={history} to={"/explorer/analytics"} className="bp3-button bp3-minimal bp3-icon-cog" onClick={this.handle_models}>Analytics</RouterButton>
+                        <RouterButton label="Analytics" activeOnlyWhenExact={false} history={history} to={"/analytics"} className="bp3-button bp3-minimal bp3-icon-cog" onClick={this.handle_models}>Analytics</RouterButton>
                         <ModelDialog ref={this.modalElement}/>
                     </div>
                 </div>
