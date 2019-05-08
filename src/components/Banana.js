@@ -6,7 +6,7 @@ class Banana extends Component{
     render() {
         return (
             <div>
-                <Iframe url="/banana" width="100%" height="800px"/>
+                <Iframe url="/banana" width="100%" height="1200px"/>
             </div>
         );
     }
