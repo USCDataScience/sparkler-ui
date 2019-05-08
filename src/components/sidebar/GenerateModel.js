@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, FormGroup, H5, H6, Icon, InputGroup} from "@blueprintjs/core";
 import {INTENT_PRIMARY} from "@blueprintjs/core/lib/cjs/common/classes";
-import {fetchNewTime, searchFired, searchWebsites, updateModel} from "../../actions";
+import {fetchNewTime, modelStats, searchFired, searchWebsites, updateModel} from "../../actions";
 import {connect} from "react-redux";
 
 class GenerateModel extends Component {
@@ -20,6 +20,10 @@ class GenerateModel extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.model_stats !== this.props.model_stats) {
             alert("Model Updated")
+        }
+
+        if(prevProps.current_model !== this.props.current_model){
+            this.props.modelStats(this.props.current_model)
         }
     }
 
@@ -61,9 +65,9 @@ class GenerateModel extends Component {
                     <H6>Minimum 10 Each</H6>
                     <table style={{textAlign:"center"}}>
                         <tr>
-                            <td>5</td>
-                            <td>4</td>
-                            <td>3</td>
+                            <td>{(this.props.model_stats && this.props.model_stats["2"]) || 0}</td>
+                            <td>{(this.props.model_stats && this.props.model_stats["1"]) || 0}</td>
+                            <td>{(this.props.model_stats && this.props.model_stats["0"]) || 0}</td>
                         </tr>
                         <tr>
                             <td><button className={"btn-circle btn-padding green"}><Icon icon={"heart"} iconSize={Icon.SIZE_LARGE}/></button></td>
@@ -85,7 +89,8 @@ const mapDispatchToProps = dispatch => ({
     updateTime: () => dispatch(fetchNewTime()),
     searchWebsites: (m,s) => dispatch(searchWebsites(m,s)),
     searchTriggered: () => dispatch(searchFired(true)),
-    updateModel: (m ,a) => dispatch(updateModel(m, a))
+    updateModel: (m ,a) => dispatch(updateModel(m, a)),
+    modelStats: (m) => dispatch(modelStats(m))
 })
 
 const mapStateToProps = state => {
