@@ -57,6 +57,19 @@ export const createNewModel = (name) => {
                     payload: name
                 }
                 dispatch(response)
+                try {
+                    const serializedState = JSON.stringify({current_model: name});
+                    localStorage.setItem('state', serializedState);
+                } catch {
+                    // ignore write errors
+                }
+                response = {
+                    type: types.ENABLE_MODEL,
+                    payload: name
+
+                };
+                dispatch(response)
+
             })
     }
 }
@@ -186,13 +199,93 @@ export const startCrawl = (model) => {
     return (dispatch) => {
         axios.post(env.API_URL+'/explorer-api/cmd/crawler/crawl/'+model)
             .then( response => {
-                response = {
-                    type: types.CRAWL_STARTED,
-                    payload: model
+                debugger;
+                let r = {
+                    type: types.CRAWL_STATUS,
+                    payload: types.CRAWL_STARTING
                 }
+                dispatch(r)
+
                 }
             )
     }
+}
+
+function getCompleted(model){
+    axios.get(env.API_URL+'/explorer-api/cmd/crawler/crawler/'+model)
+        .then(response =>{
+            let t = null;
+            let s = getStatus(response.data, model);
+
+
+            return s === "COMPLETED";
+
+        })
+
+    return false;
+}
+
+export const crawlStatus =  (model) => {
+    return (dispatch) => {
+        axios.get(env.API_URL+'/explorer-api/cmd/crawler/crawler/'+model)
+            .then(response =>{
+                let t = null;
+                let s = getStatus(response.data, model);
+
+                if(s === "RUNNING" ){
+                    t = types.CRAWL_STARTED
+                }
+                else if(s === "STARTING"){
+                    t = types.CRAWL_STARTING
+                }
+                else if(s === "COMPLETED"){
+                    t = types.CRAWL_FINISHED
+                }
+                else{
+                    t = types.CRAWL_STARTED
+                }
+
+                response = {
+                    type: types.CRAWL_STATUS,
+                    payload: t
+                }
+
+                dispatch(response)
+            })
+    }
+}
+
+function getStatus(data, model) {
+    debugger;
+
+    for (let key in data.items) {
+        if (data.items.hasOwnProperty(key)) {
+            console.log(key + " -> " + data.items[key]);
+            let item = data.items[key];
+            let c = item.spec.containers[0];
+            if(c.name === model+"crawl"){
+                if(item.status.hasOwnProperty("containerStatuses")){
+                    if(item.status.containerStatuses[0].hasOwnProperty("state")){
+                        let state = item.status.containerStatuses[0].state;
+                        for(let k in state){
+                            if(k==="waiting"){
+                                return "STARTING"
+                            }
+                            else if(k==="terminated"){
+                                return "COMPLETED"
+                            }
+                        }
+
+
+                    }
+                }
+                else{
+                    return "STARTING"
+                }
+            }
+        }
+    }
+
 }
 /*
 export const login = (user) => ({

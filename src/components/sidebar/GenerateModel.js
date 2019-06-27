@@ -56,7 +56,11 @@ class GenerateModel extends Component {
                            label={"Search terms"}
                            labelFor={"text-input"}>
                     <InputGroup id={"searchterms"} type="search" value={this.state.searchterm}
-                                onChange={this.handleChange} leftIcon="search" placeholder="Enter terms here"
+                                onChange={this.handleChange}  onKeyPress={event => {
+                        if (event.key === 'Enter') {
+                            this.handleSearch()
+                        }
+                    }} leftIcon="search" placeholder="Enter terms here"
                                 intent={this.state.intent}/>
                     <Button disabled={!this.props.current_model} onClick={() => this.handleSearch()}>Go!</Button>
                 </FormGroup>

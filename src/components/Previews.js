@@ -10,6 +10,7 @@ class Previews extends Component{
     static render_nowebsites(){
         return(
             <Container>
+                <Row><Col xs={12}>Generating Previews - This May Take A Few Minutes</Col></Row>
                 <Row>
                     <Col sm={4}>
                         <IFrameFrame/>
@@ -79,11 +80,64 @@ class Previews extends Component{
 //var marker = get_marker(jdata[i - 1]['label']);
     render_websites() {
         let arr = [];
+        debugger;
         let matrix  = Previews.listToMatrix(this.props.websites, 3)
+        console.log(matrix)
         for(let i=0; i< matrix.length; i++){
-            arr.push(<Row ><Col sm={4}><IFrameFrame iframe={"page"+matrix[i][1].pos+"-ann"} url={matrix[i][1].obj.url} title={matrix[i][1].obj.title}/></Col>
-                <Col sm={4}><IFrameFrame iframe={"page"+matrix[i][2].pos+"-ann"} url={matrix[i][2].obj.url} title={matrix[i][2].obj.title}/>
-                </Col><Col sm={4}><IFrameFrame iframe={"page"+matrix[i][3].pos+"-ann"} url={matrix[i][3].obj.url} title={matrix[i][3].obj.title}/></Col>
+            if(matrix[i][1]===undefined) {
+                matrix[i][1] = {}
+                matrix[i][1].obj = {image: "", url: "", title: ""}
+                matrix[i][1].obj = {image: "", url: "", title: ""}
+                matrix[i][1].obj = {image: "", url: "", title: ""}
+
+            }
+            if(matrix[i][2]===undefined) {
+                matrix[i][2] = {}
+                matrix[i][2].obj = {image: "", url: "", title: ""}
+                matrix[i][2].obj = {image: "", url: "", title: ""}
+                matrix[i][2].obj = {image: "", url: "", title: ""}
+
+            }
+            if(matrix[i][3]===undefined) {
+                matrix[i][3] = {}
+                matrix[i][3].obj = {image: "", url: "", title: ""}
+                matrix[i][3].obj = {image: "", url: "", title: ""}
+                matrix[i][3].obj = {image: "", url: "", title: ""}
+
+            }
+            if(matrix[i][1] && matrix[i][1].obj.image === undefined){
+                matrix[i][1].obj.image = "";
+            }
+            if(matrix[i][1] && matrix[i][1].obj.url === undefined){
+                matrix[i][1].obj.url = "";
+            }
+            if(matrix[i][1] && matrix[i][1].obj.title === undefined){
+                matrix[i][1].obj.title = "";
+            }
+
+            if(matrix[i][2] && matrix[i][2].obj.image === undefined){
+                matrix[i][2].obj.image = "";
+            }
+            if(matrix[i][2] && matrix[i][2].obj.url === undefined){
+                matrix[i][2].obj.url = "";
+            }
+            if(matrix[i][2] && matrix[i][2].obj.title === undefined){
+                matrix[i][2].obj.title = "";
+            }
+
+            if(matrix[i][3] && matrix[i][3].obj.image === undefined){
+                matrix[i][3].obj.image = "";
+            }
+            if(matrix[i][3] && matrix[i][3].obj.url === undefined){
+                matrix[i][3].obj.url = "";
+            }
+            if(matrix[i][3] && matrix[i][3].obj.title === undefined){
+                matrix[i][3].obj.title = "";
+            }
+
+            arr.push(<Row ><Col sm={4}><IFrameFrame image={matrix[i][1].obj.image} iframe={"page"+matrix[i][1].pos+"-ann"} url={matrix[i][1].obj.url} title={matrix[i][1].obj.title}/></Col>
+                <Col sm={4}><IFrameFrame image={matrix[i][2].obj.image} iframe={"page"+matrix[i][2].pos+"-ann"} url={matrix[i][2].obj.url} title={matrix[i][2].obj.title}/>
+                </Col><Col sm={4}><IFrameFrame image={matrix[i][3].obj.image} iframe={"page"+matrix[i][3].pos+"-ann"} url={matrix[i][3].obj.url} title={matrix[i][3].obj.title}/></Col>
             </Row>)
         }
         return arr;
@@ -91,7 +145,10 @@ class Previews extends Component{
 
 
     render(){
-        if(this.props.running){
+        if(this.props.current_model === undefined){
+            return(<div><h1>Please select or create a model</h1></div>)
+        }
+        else if(this.props.running){
             return(Previews.render_nowebsites())
         }
         else if(this.props.websites===undefined){
@@ -107,7 +164,8 @@ class Previews extends Component{
 const mapStateToProps = state => {
     return {
         websites: state.searchreducer.websites,
-        running: state.searchreducer.running
+        running: state.searchreducer.running,
+        current_model: state.modelreducer.current_model
 
     }
 }

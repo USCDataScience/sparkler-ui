@@ -15,7 +15,9 @@ const modelReducer = (state = [], action) => {
         case types.MODEL_STATS:
             return { ...state, model_stats: action.payload};
         case types.CRAWL_STARTED:
-            return { ...state, crawl: action.payload}
+            return { ...state, crawl: action.payload};
+        case types.CRAWL_STATUS:
+            return { ...state, crawl_status: action.payload};
         default:
             return state;
     }

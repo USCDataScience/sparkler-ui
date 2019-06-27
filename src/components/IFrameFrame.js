@@ -5,6 +5,8 @@ import {Col, Container, Row} from "react-grid-system";
 import {connect} from "react-redux";
 import {setRelevancy} from "../actions";
 
+const Example = ({ data }) => <img style={{width:"100%"}} src={`data:image/jpeg;base64,${data}`} />
+
 class IFrameFrame extends Component{
 
 
@@ -26,10 +28,11 @@ class IFrameFrame extends Component{
         this.props.setRelevancy(this.props.iframe, val)
     }
 
+
     render() {
         return(
 
-        <Card style={{height:"370px"}}  interactive={true} elevation={Elevation.TWO}>
+        <Card style={{height:"470px"}}  interactive={true} elevation={Elevation.TWO}>
             <Container fluid >
                 <Row>
                     <Col sm={12}>
@@ -39,7 +42,8 @@ class IFrameFrame extends Component{
                 </Row>
                 <Row className={this.props.skeleton ? Classes.SKELETON : ''} style={{marginTop:"10px", height:"220px"}}>
                     <Col sm={12}>
-                        <Iframe scrolling="true" url={this.props.url} width="100%" height="200px"/>
+                        {/*<Iframe scrolling="true" url={this.props.url} width="100%" height="200px"/>*/}
+                        <Example data={this.props.image} />
                     </Col></Row>
                 <br />
 
@@ -69,4 +73,4 @@ const mapDispatchToProps = dispatch => ({
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(IFrameFrame)
+export default  connect(mapStateToProps, mapDispatchToProps)(IFrameFrame)
