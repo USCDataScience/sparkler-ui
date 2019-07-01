@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button, H5} from "@blueprintjs/core";
 import {connect} from "react-redux";
-import {crawlStatus, startCrawl} from "../../actions";
+import {crawlStatus, killCrawl, startCrawl} from "../../actions";
 import {CRAWL_FINISHED, CRAWL_STARTED, CRAWL_STARTING} from "../../reducers/types";
 
 
@@ -50,7 +50,7 @@ class StartCrawl extends Component {
     }
 
     handleClick2 = function(){
-        this.props.crawlStatus(this.props.current_model)
+        this.props.killCrawl(this.props.current_model)
 
     }
     render(){
@@ -58,7 +58,8 @@ class StartCrawl extends Component {
             <div>
                 <H5>Start the Crawl</H5>
                 <Button disabled={!this.props.current_model || this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED} icon={"time"} text="Start Crawler" onClick={this.handleClick}/>
-                <Button disabled={!this.props.current_model} icon={"time"} text="Update Crawler" onClick={this.handleClick2}/>
+                <br/>
+                <Button disabled={!this.props.current_model || !(this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED)} icon={"time"} text="Kill Crawl" onClick={this.handleClick2}/>
 
             </div>
         )
@@ -74,7 +75,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     startCrawl: (model) => dispatch(startCrawl(model)),
-    crawlStatus: (model) => dispatch(crawlStatus(model))
+    crawlStatus: (model) => dispatch(crawlStatus(model)),
+    killCrawl: (model) => dispatch(killCrawl(model))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartCrawl)

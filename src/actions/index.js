@@ -211,6 +211,23 @@ export const startCrawl = (model) => {
     }
 }
 
+export const killCrawl = (model) => {
+    return (dispatch) => {
+        axios.delete(env.API_URL+'/explorer-api/cmd/crawler/crawl/'+model)
+            .then( response => {
+                    debugger;
+                    let r = {
+                        type: types.CRAWL_STATUS,
+                        payload: types.CRAWL_FINISHED
+                    }
+                    dispatch(r)
+
+                }
+            )
+    }
+}
+
+
 function getCompleted(model){
     axios.get(env.API_URL+'/explorer-api/cmd/crawler/crawler/'+model)
         .then(response =>{

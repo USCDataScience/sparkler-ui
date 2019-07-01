@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 import {Button, Card, Classes, Elevation, H5} from "@blueprintjs/core";
-import Iframe from "react-iframe";
 import {Col, Container, Row} from "react-grid-system";
 import {connect} from "react-redux";
 import {setRelevancy} from "../actions";
 
-const Example = ({ data }) => <img style={{width:"100%"}} src={`data:image/jpeg;base64,${data}`} />
+const Example = ({ data }) => <img style={{maxWidth:"100%", height:"100%"}} src={`data:image/jpeg;base64,${data}`} />
 
 class IFrameFrame extends Component{
 
@@ -40,7 +39,7 @@ class IFrameFrame extends Component{
             <H5 className={this.props.skeleton ? Classes.SKELETON : ''}>URL: {this.props.url}</H5>
                     </Col>
                 </Row>
-                <Row className={this.props.skeleton ? Classes.SKELETON : ''} style={{marginTop:"10px", height:"220px"}}>
+                <Row className={this.props.skeleton ? Classes.SKELETON : ''} style={{marginTop:"10px", height:"320px"}}>
                     <Col sm={12}>
                         {/*<Iframe scrolling="true" url={this.props.url} width="100%" height="200px"/>*/}
                         <Example data={this.props.image} />
