@@ -39,7 +39,7 @@ class IFrameFrame extends Component{
             <H5 className={this.props.skeleton ? Classes.SKELETON : ''}>URL: {this.props.url}</H5>
                     </Col>
                 </Row>
-                <Row className={this.props.skeleton ? Classes.SKELETON : ''} style={{marginTop:"10px", height:"320px"}}>
+                <Row className={this.props.skeleton ? Classes.SKELETON : ''} style={{marginTop:"10px", height:"300px"}}>
                     <Col sm={12}>
                         {/*<Iframe scrolling="true" url={this.props.url} width="100%" height="200px"/>*/}
                         <Example data={this.props.image} />

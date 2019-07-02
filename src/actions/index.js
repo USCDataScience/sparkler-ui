@@ -247,27 +247,47 @@ export const crawlStatus =  (model) => {
         axios.get(env.API_URL+'/explorer-api/cmd/crawler/crawler/'+model)
             .then(response =>{
                 let t = null;
-                let s = getStatus(response.data, model);
 
-                if(s === "RUNNING" ){
-                    t = types.CRAWL_STARTED
-                }
-                else if(s === "STARTING"){
-                    t = types.CRAWL_STARTING
-                }
-                else if(s === "COMPLETED"){
-                    t = types.CRAWL_FINISHED
-                }
-                else{
-                    t = types.CRAWL_STARTED
-                }
+                if ('running' in response.data){
+                    if(response.data.running === "true"){
+                        t = types.CRAWL_STARTED
+                        response = {
+                            type: types.CRAWL_STATUS,
+                            payload: t
+                        }
 
-                response = {
-                    type: types.CRAWL_STATUS,
-                    payload: t
-                }
+                        dispatch(response)
+                    }
+                    else{
+                        t = types.CRAWL_FINISHED
+                        response = {
+                            type: types.CRAWL_STATUS,
+                            payload: t
+                        }
 
-                dispatch(response)
+                        dispatch(response)
+                    }
+                }
+                else {
+                    let s = getStatus(response.data, model);
+
+                    if (s === "RUNNING") {
+                        t = types.CRAWL_STARTED
+                    } else if (s === "STARTING") {
+                        t = types.CRAWL_STARTING
+                    } else if (s === "COMPLETED") {
+                        t = types.CRAWL_FINISHED
+                    } else {
+                        t = types.CRAWL_STARTED
+                    }
+
+                    response = {
+                        type: types.CRAWL_STATUS,
+                        payload: t
+                    }
+
+                    dispatch(response)
+                }
             })
     }
 }
