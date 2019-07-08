@@ -15,16 +15,33 @@ class IFrameFrame extends Component{
         this.state = {
             title: "",
             url: "",
-            skeleton: true
-
+            skeleton: true,
+            hr_btn_class : false,
+            r_btn_class : false,
+            nr_btn_class : false
         }
         this.updaterelevancy = this.updaterelevancy.bind(this);
 
     }
 
-    updaterelevancy = function(val){
+    updaterelevancy = function(val, which){
         debugger;
         this.props.setRelevancy(this.props.iframe, val)
+        if(which === "hr"){
+            this.setState({hr_btn_class:true});
+            this.setState({r_btn_class:false});
+            this.setState({nr_btn_class:false});
+        }
+        else if(which ==="r"){
+            this.setState({hr_btn_class:false});
+            this.setState({r_btn_class:true});
+            this.setState({nr_btn_class:false});
+        }
+        else{
+            this.setState({hr_btn_class:false});
+            this.setState({r_btn_class:false});
+            this.setState({nr_btn_class:true});
+        }
     }
 
 
@@ -48,9 +65,9 @@ class IFrameFrame extends Component{
 
                 <Row>
                     <Col sm={12}>
-                        <Button onClick={() => this.updaterelevancy(2)} className={this.props.skeleton ? Classes.SKELETON : ''}>Highly Relevant</Button>
-                        <Button onClick={() => this.updaterelevancy(1)} className={this.props.skeleton ? Classes.SKELETON : ''}>Relevant</Button>
-                        <Button onClick={() => this.updaterelevancy(0)} className={this.props.skeleton ? Classes.SKELETON : ''}>Not Relevant</Button>
+                        <Button onClick={() => this.updaterelevancy(2, "hr")} className={`${this.props.skeleton ? Classes.SKELETON : ''} ${this.state.hr_btn_class ? Classes.ACTIVE: null}`}>Highly Relevant</Button>
+                        <Button onClick={() => this.updaterelevancy(1, "r")} className={`${this.props.skeleton ? Classes.SKELETON : ''} ${this.state.r_btn_class ? Classes.ACTIVE: null}`}>Relevant</Button>
+                        <Button onClick={() => this.updaterelevancy(0, "nr")} className={`${this.props.skeleton ? Classes.SKELETON : ''} ${this.state.nr_btn_class ? Classes.ACTIVE: null}`}>Not Relevant</Button>
                     </Col>
                 </Row>
             </Container>
