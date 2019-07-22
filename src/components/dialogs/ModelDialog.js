@@ -40,8 +40,8 @@ class ModelDialog extends Component{
             <div className={Classes.DIALOG_BODY} style={{minHeight:"200px"}}>
 
                 <Tabs id={"modeltabs"}>
-                    <Tab id={"newmodel"} title={"New Model"} panel={<NewModel close={this.handleClose} />}/>
                     <Tab id={"existingmodels"} title={"Existing Models"} panel={<ListModels/>}/>
+                    <Tab id={"newmodel"} title={"New Model"} panel={<NewModel close={this.handleClose} />}/>
                 </Tabs>
             </div>
             <div className={Classes.DIALOG_FOOTER}>
