@@ -52,7 +52,7 @@ class IFrameFrame extends Component{
     render() {
         return(
 
-        <Card style={{height:"470px"}} onClick={() => this.launchPreview()} interactive={true} elevation={Elevation.TWO}>
+        <Card style={{height:"470px"}} interactive={true} elevation={Elevation.TWO}>
             <Container fluid >
                 <Row>
                     <Col sm={12}>
