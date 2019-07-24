@@ -45,20 +45,23 @@ class IFrameFrame extends Component{
     }
 
 
+    launchPreview = () =>{
+        window.open(this.props.url, "_blank")
+    }
+
     render() {
         return(
 
-        <Card style={{height:"470px"}}  interactive={true} elevation={Elevation.TWO}>
+        <Card style={{height:"470px"}} onClick={() => this.launchPreview()} interactive={true} elevation={Elevation.TWO}>
             <Container fluid >
                 <Row>
                     <Col sm={12}>
-            <H5 className={this.props.skeleton ? Classes.SKELETON : ''}>Title: {this.state.title}</H5>
-            <H5 className={this.props.skeleton ? Classes.SKELETON : ''}>URL: {this.props.url}</H5>
+                        <a href={this.props.url} target="_blank"><H5 className={this.props.skeleton ? Classes.SKELETON : ''}>Title: {this.state.title}</H5></a>
+                        <a href={this.props.url} target="_blank"><H5 style={{textOverflow:"ellipsis", whiteSpace: "nowrap", overflow:"hidden"}} className={this.props.skeleton ? Classes.SKELETON : ''}>URL: {this.props.url}</H5></a>
                     </Col>
                 </Row>
                 <Row className={this.props.skeleton ? Classes.SKELETON : ''} style={{marginTop:"10px", height:"300px"}}>
                     <Col sm={12}>
-                        {/*<Iframe scrolling="true" url={this.props.url} width="100%" height="200px"/>*/}
                         <Example data={this.props.image} />
                     </Col></Row>
                 <br />
