@@ -30,6 +30,7 @@ class Navbar extends Component {
                         <RouterButton label="Explorer" activeOnlyWhenExact={false} history={history} to={"/"} className="bp3-button bp3-minimal bp3-icon-home">Explorer</RouterButton>
                         <button className="bp3-button bp3-minimal bp3-icon-cog" onClick={this.handle_models}>Models</button>
                         <RouterButton label="Analytics" activeOnlyWhenExact={false} history={history} to={"/analytics"} className="bp3-button bp3-minimal bp3-icon-cog" onClick={this.handle_models}>Analytics</RouterButton>
+                        <RouterButton label="Solr" activeOnlyWhenExact={false} history={history} to={"/solr"} className="bp3-button bp3-minimal bp3-icon-cog" onClick={this.handle_models}>Solr</RouterButton>
                         <ModelDialog ref={this.modalElement}/>
                     </div>
                 </div>
