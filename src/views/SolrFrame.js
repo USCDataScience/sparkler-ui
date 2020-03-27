@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Col, Container, Row} from "react-grid-system";
-import Banana from "../components/Banana";
+import Solr from "../components/Solr";
 
 class Home extends Component {
 

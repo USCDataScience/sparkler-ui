@@ -3,6 +3,7 @@ import {Col, Container, Row} from "react-grid-system";
 import GenerateModel from "../components/sidebar/GenerateModel";
 import CreateSeed from "../components/sidebar/CreateSeed";
 import StartCrawl from "../components/sidebar/StartCrawl";
+import ExportData from "../components/sidebar/ExportData";
 import {Divider} from "@blueprintjs/core";
 import Previews from "../components/Previews";
 
@@ -19,6 +20,8 @@ class Home extends Component {
                         <CreateSeed/>
                         <Divider/>
                         <StartCrawl/>
+                        <Divider/>
+                        <ExportData/>
                     </Col>
                     <Col sm={9}>
                         <Previews/>

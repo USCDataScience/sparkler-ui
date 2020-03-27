@@ -1,53 +1,19 @@
 import * as types from '../reducers/types';
 import * as env from '../utils/constants'
 import axios from 'axios';
-//var Database = require('arangojs').Database;
+import fileDownload from "js-file-download";
 
-//var db = new Database('http://127.0.0.1:8529');
-/*
-db.createDatabase('sce').then(
-    () => console.log('Database created'),
-    err => console.error('Failed to create database:', err)
-);*/
-
-//db.useDatabase('sce');
-
-//let collection = db.collection('models');
-
-/*
-
-collection.create().then(
-    () => console.log('Collection created'),
-    err => console.error('Failed to create collection:', err)
-);
-*/
-
-
-/*let doc = {
-    _key: 'firstDocument',
-    a: 'foo',
-    b: 'bar',
-    c: Date()
-};
-
-
-collection.save(doc).then(
-    meta => console.log('Document saved:', meta._rev),
-    err => console.error('Failed to save document:', err)
-);
-
-
-collection.update('firstDocument', {d: 'qux'}).then(
-    meta => console.log('Document updated:', meta._rev),
-    err => console.error('Failed to update document:', err)
-);
-
-
-collection.document('firstDocument').then(
-    doc => console.log('Document:', JSON.stringify(doc, null, 2)),
-    err => console.error('Failed to fetch document:', err)
-);*/
-
+export const exportData = (model) => {
+    return (dispatch) => {
+        axios.get("/solr/crawldb/select?indent=on&q=crawl_id:"+model+"&wt=json").then((
+            response => {
+                debugger;
+                fileDownload(response.data, 'export.json');
+                dispatch({type: types.DATA_EXPORTED, payload: "OK"})
+            }
+        ))
+    }
+}
 export const createNewModel = (name) => {
     return (dispatch) => {
         axios.get(env.API_URL+"/explorer-api/classify/createnew/"+name)
