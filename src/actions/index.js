@@ -8,7 +8,7 @@ export const exportData = (model) => {
         axios.get("/solr/crawldb/select?indent=on&q=crawl_id:"+model+"&wt=json").then((
             response => {
                 debugger;
-                fileDownload(JSON.stringify(response.data), 'export.json');
+                fileDownload(JSON.stringify(response.data, null, 2), 'export.json');
                 dispatch({type: types.DATA_EXPORTED, payload: "OK"})
             }
         ))
