@@ -3,6 +3,33 @@ import * as env from '../utils/constants'
 import axios from 'axios';
 import fileDownload from "js-file-download";
 
+export const fetchConfig = (model) => {
+    return (dispatch) => {
+        axios.get(env.API_URL+"/explorer-api/cmd/crawler/settings/"+model).then(
+            response => {
+                let r = {
+                    type: types.NEW_CONFIG,
+                    payload: response.data
+                }
+                dispatch(r)
+            }
+        )
+    }
+}
+
+export const updateCrawlConfig = (model, config) => {
+    return (dispatch) => {
+        axios.post(env.API_URL+"/explorer-api/cmd/crawler/settings/"+model, config).then(
+            response => {
+                let r = {
+                    type: types.NEW_CONFIG,
+                    payload: response.data
+                }
+                dispatch(r)
+            }
+        )
+    }
+}
 export const exportData = (model) => {
     return (dispatch) => {
         axios.get("/solr/crawldb/select?indent=on&q=crawl_id:"+model+"&wt=json").then((

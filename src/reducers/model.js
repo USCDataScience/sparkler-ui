@@ -18,6 +18,8 @@ const modelReducer = (state = [], action) => {
             return { ...state, crawl: action.payload};
         case types.CRAWL_STATUS:
             return { ...state, crawl_status: action.payload};
+        case types.NEW_CONFIG:
+            return { ...state, current_config: action.payload}
         default:
             return state;
     }

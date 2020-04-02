@@ -6,6 +6,7 @@ import StartCrawl from "../components/sidebar/StartCrawl";
 import ExportData from "../components/sidebar/ExportData";
 import {Divider} from "@blueprintjs/core";
 import Previews from "../components/Previews";
+import CrawlConfig from "../components/sidebar/CrawlConfig";
 
 
 class Home extends Component {
@@ -18,6 +19,7 @@ class Home extends Component {
                         <GenerateModel/>
                         <Divider/>
                         <CreateSeed/>
+                        <CrawlConfig/>
                         <Divider/>
                         <StartCrawl/>
                         <Divider/>
