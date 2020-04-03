@@ -12,4 +12,6 @@ export const CRAWL_STARTING = 'CRAWL_STARTING';
 export const CRAWL_FINISHED = 'CRAWL_FINISHED';
 export const CRAWL_STATUS = 'CRAWL_STATUS';
 export const DATA_EXPORTED = 'DATA_EXPORTED';
-export const NEW_CONFIG = 'NEW_CONFIG';
+export const NEW_CONFIG = 'NEW_CONFIG'
+export const SEED_URLS_LIST = 'SEED_URLS_LIST';
+export const DOWNLOADED = 'DOWNLOADED';

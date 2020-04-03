@@ -3,6 +3,29 @@ import * as env from '../utils/constants'
 import axios from 'axios';
 import fileDownload from "js-file-download";
 
+export const fetchModel = (model) =>{
+    window.open(env.API_URL+'/explorer-api/classify/download/'+model, '_blank');
+    return (dispatch) => {
+                let r = {
+                    type: types.DOWNLOADED,
+                    payload: ""
+                }
+                dispatch(r)
+    }
+}
+export const fetchSeeds = (model) => {
+    return (dispatch) => {
+        axios.get(env.API_URL+"/explorer-api/cmd/seed.fetch/"+model).then(
+            response => {
+                let r = {
+                    type: types.SEED_URLS_LIST,
+                    payload: response.data
+                }
+                dispatch(r)
+            }
+        )
+    }
+}
 export const fetchConfig = (model) => {
     return (dispatch) => {
         axios.get(env.API_URL+"/explorer-api/cmd/crawler/settings/"+model).then(

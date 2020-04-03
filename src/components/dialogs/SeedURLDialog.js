@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Classes, Dialog, Intent, TextArea, Tooltip} from "@blueprintjs/core";
-import {saveSeedURLs} from "../../actions";
+import {fetchSeeds, saveSeedURLs} from "../../actions";
 import {connect} from "react-redux";
 
 class SeedURLDialog extends Component {
@@ -20,6 +20,13 @@ class SeedURLDialog extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.seed_urls !== prevProps.seed_urls){
             this.handleClose()
+        }
+
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if(this.props.current_model !== nextProps.current_model){
+            this.props.fetchSeeds(nextProps.current_model);
         }
     }
 
@@ -52,6 +59,8 @@ class SeedURLDialog extends Component {
                           value={this.state.value}
                           fill={true}
                 />
+                <h5>Existing Seeds</h5>
+                <TextArea value={this.props.seeds}/>
                 </div>
                 <div className={Classes.DIALOG_FOOTER}>
                     <div className={Classes.DIALOG_FOOTER_ACTIONS}>
@@ -73,13 +82,15 @@ class SeedURLDialog extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    saveSeedURLs: (m,s) => dispatch(saveSeedURLs(m,s))
+    saveSeedURLs: (m,s) => dispatch(saveSeedURLs(m,s)),
+    fetchSeeds: (m) => dispatch(fetchSeeds(m))
 })
 
 const mapStateToProps = state => {
     return {
         current_model: state.modelreducer.current_model,
-        seed_urls: state.modelreducer.seed_urls
+        seed_urls: state.modelreducer.seed_urls,
+        seeds: state.modelreducer.seeds
     }
 }
 
