@@ -21,7 +21,7 @@ class CrawlConfig extends Component {
     render(){
         return(
             <div>
-            <H5>Create Seed File</H5>
+            <H5>Crawler Configuration</H5>
             <AnchorButton disabled={!this.props.current_model} icon={"import"} onClick={this.handleOpen} text="Crawler Configuration File" />
             <CrawlConfigDialog ref={this.modalElement}/>
             </div>

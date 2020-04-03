@@ -188,9 +188,9 @@ export const setRelevancy = (frame, val) => {
 }
 
 
-export const startCrawl = (model) => {
+export const startCrawl = (model, obj) => {
     return (dispatch) => {
-        axios.post(env.API_URL+'/explorer-api/cmd/crawler/crawl/'+model)
+        axios.post(env.API_URL+'/explorer-api/cmd/crawler/crawl/'+model, obj)
             .then( response => {
                 debugger;
                 let r = {
