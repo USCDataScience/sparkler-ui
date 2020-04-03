@@ -7,6 +7,7 @@ import ExportData from "../components/sidebar/ExportData";
 import {Divider} from "@blueprintjs/core";
 import Previews from "../components/Previews";
 import CrawlConfig from "../components/sidebar/CrawlConfig";
+import ExportModel from "../components/sidebar/ExportModel";
 
 
 class Home extends Component {
@@ -24,6 +25,7 @@ class Home extends Component {
                         <StartCrawl/>
                         <Divider/>
                         <ExportData/>
+                        <ExportModel/>
                     </Col>
                     <Col sm={9}>
                         <Previews/>

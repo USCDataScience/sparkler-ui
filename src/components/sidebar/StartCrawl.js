@@ -27,8 +27,7 @@ class StartCrawl extends Component {
             <div>
                 <H5>Create Seed File</H5>
                 <AnchorButton disabled={!this.props.current_model} icon={"import"} onClick={this.handleOpen} text="Start Crawl" />
-                <br/>
-                <Button disabled={!this.props.current_model || !(this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED)} icon={"time"} text="Kill Crawl" onClick={this.handleClick2}/>
+                <Button style={{marginLeft: "10px"}} disabled={!this.props.current_model || !(this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED)} icon={"time"} text="Kill Crawl" onClick={this.handleClick2}/>
                 <StartCrawlDialog ref={this.modalElement}/>
             </div>
         )
