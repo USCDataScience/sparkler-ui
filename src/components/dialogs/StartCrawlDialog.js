@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent, TextArea, Tooltip} from "@blueprintjs/core";
-import {fetchConfig, saveSeedURLs, updateCrawlConfig} from "../../actions";
+import {fetchConfig, saveSeedURLs, startCrawl, updateCrawlConfig} from "../../actions";
 import {connect} from "react-redux";
 
 class CrawlConfigDialog extends Component {
@@ -47,18 +47,20 @@ class CrawlConfigDialog extends Component {
     handleOkay() {
         let obj = {}
         if(this.state.iterations !== undefined){
-            obj.push({"iterations":this.state.iterations})
+            obj["iterations"] = this.state.iterations
         }
         if(this.state.topgroups !== undefined) {
-            obj.push({"topgroups":this.state.topgroups})
+            obj["topgroups"] = this.state.topgroups
         }
         if(this.state.topn !== undefined){
-            obj.push({"topn":this.state.topn})
+            obj["topn"] = this.state.topn
         }
         this.props.startCrawl(this.props.current_model,obj);
         this.handleClose()
     }
-
+    handleItChange(event) {    this.setState({iterations: event.target.value});  }
+    handleGroupChange(event) {    this.setState({topgroups: event.target.value});  }
+    handleTopNChange(event) {    this.setState({topn: event.target.value});  }
 
     render() {
 
@@ -76,7 +78,7 @@ class CrawlConfigDialog extends Component {
                         label={"Iterations"}
                         labelFor="text-input"
                     >
-                        <InputGroup id="text-input" value={this.state.iterations}/>
+                        <InputGroup id="text-input" onChange={this.handleItChange.bind(this)} value={this.state.iterations}/>
                     </FormGroup>
                     <FormGroup
                         helperText={"Max groups to be selected for fetch"}
@@ -84,7 +86,7 @@ class CrawlConfigDialog extends Component {
                         label={"Top Groups"}
                         labelFor="text-input"
                     >
-                        <InputGroup id="text-input" placeholder={"Leave Blank for Default"} value={this.state.topgroups}/>
+                        <InputGroup id="text-input" placeholder={"Leave Blank for Default"} onChange={this.handleGroupChange.bind(this)} value={this.state.topgroups}/>
                     </FormGroup>
                     <FormGroup
                         helperText={"Top URLs per domain to be selected for a round"}
@@ -92,7 +94,7 @@ class CrawlConfigDialog extends Component {
                         label={"Top URLs"}
                         labelFor="text-input"
                     >
-                        <InputGroup id="text-input" placeholder={"Leave Blank for Default"} value={this.state.topn}/>
+                        <InputGroup id="text-input" placeholder={"Leave Blank for Default"} onChange={this.handleTopNChange.bind(this)}  value={this.state.topn}/>
                     </FormGroup>
                 </div>
                 <div className={Classes.DIALOG_FOOTER}>
@@ -115,6 +117,8 @@ class CrawlConfigDialog extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
+    startCrawl: (model, opts) => dispatch(startCrawl(model, opts)),
+
 })
 
 const mapStateToProps = state => {
