@@ -24,10 +24,7 @@ class SeedURLDialog extends Component {
 
     }
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if(this.props.current_model !== nextProps.current_model){
-            this.props.fetchSeeds(nextProps.current_model);
-        }
+    componentDidMount() {
     }
 
     handleClose = () => this.setState({isOpen: false});
@@ -39,6 +36,20 @@ class SeedURLDialog extends Component {
 
     handleOkay() {
         this.props.saveSeedURLs(this.props.current_model, this.state.value)
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        debugger;
+        if(nextProps.current_model !== undefined && nextProps.current_model !== this.props.current_model){
+            this.props.fetchSeeds(nextProps.current_model);
+            return true
+        }
+        if(this.props.seeds !== nextProps.seeds){
+            return true;
+        }
+        if(this.state.isOpen !== nextState.isOpen){
+            return true;
+        }
     }
 
 
@@ -60,7 +71,9 @@ class SeedURLDialog extends Component {
                           fill={true}
                 />
                 <h5>Existing Seeds</h5>
-                <TextArea value={this.props.seeds}/>
+                <TextArea growVertically={true}
+                          large={true}
+                          intent={Intent.PRIMARY} disabled={true} fill={true} value={this.props.seeds}/>
                 </div>
                 <div className={Classes.DIALOG_FOOTER}>
                     <div className={Classes.DIALOG_FOOTER_ACTIONS}>

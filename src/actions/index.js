@@ -15,7 +15,7 @@ export const fetchModel = (model) =>{
 }
 export const fetchSeeds = (model) => {
     return (dispatch) => {
-        axios.get(env.API_URL+"/explorer-api/cmd/seed.fetch/"+model).then(
+        axios.get(env.API_URL+"/explorer-api/cmd/seed/fetch/"+model).then(
             response => {
                 let r = {
                     type: types.SEED_URLS_LIST,
@@ -57,7 +57,6 @@ export const exportData = (model) => {
     return (dispatch) => {
         axios.get("/solr/crawldb/select?indent=on&q=crawl_id:"+model+"&wt=json").then((
             response => {
-                debugger;
                 fileDownload(JSON.stringify(response.data, null, 2), 'export.json');
                 dispatch({type: types.DATA_EXPORTED, payload: "OK"})
             }
@@ -98,7 +97,6 @@ export const updateModel = (name, annotations) => {
                     type: types.MODEL_STATS,
                     payload: response.data
                 }
-                debugger;
                 dispatch(response)
             })
     }
@@ -215,7 +213,6 @@ export const startCrawl = (model, obj) => {
     return (dispatch) => {
         axios.post(env.API_URL+'/explorer-api/cmd/crawler/crawl/'+model, obj)
             .then( response => {
-                debugger;
                 let r = {
                     type: types.CRAWL_STATUS,
                     payload: types.CRAWL_STARTING
@@ -231,7 +228,6 @@ export const killCrawl = (model) => {
     return (dispatch) => {
         axios.delete(env.API_URL+'/explorer-api/cmd/crawler/crawl/'+model)
             .then( response => {
-                    debugger;
                     let r = {
                         type: types.CRAWL_STATUS,
                         payload: types.CRAWL_FINISHED
@@ -309,7 +305,6 @@ export const crawlStatus =  (model) => {
 }
 
 function getStatus(data, model) {
-    debugger;
 
     for (let key in data.items) {
         if (data.items.hasOwnProperty(key)) {
