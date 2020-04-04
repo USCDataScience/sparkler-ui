@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Button, H5} from "@blueprintjs/core";
 import {connect} from "react-redux";
 import {crawlStatus, killCrawl, startCrawl} from "../../actions";
@@ -22,44 +22,49 @@ class StartCrawl_old extends Component {
             setTimeout(function () {
                 // execute script
                 debugger;
-                if(that.props.crawl_status  !== CRAWL_FINISHED){
+                if (that.props.crawl_status !== CRAWL_FINISHED) {
 
-                that.props.crawlStatus(that.props.current_model)
-                loop()
+                    that.props.crawlStatus(that.props.current_model)
+                    loop()
                 }
             }, 9000);
         }());
     }
 
     check_status2() {
-        setInterval(function() {
+        setInterval(function () {
             this.props.crawlStatus(this.props.current_model)
         }, 5000);
     }
 
     componentWillUpdate(nextProps, nextState, nextContext) {
-        if(nextProps.crawl_status  === CRAWL_STARTING || nextProps.crawl_status === CRAWL_STARTED){
+        if (nextProps.crawl_status === CRAWL_STARTING || nextProps.crawl_status === CRAWL_STARTED) {
             this.check_status()
         }
     }
 
 
-    handleClick = function(){
+    handleClick = function () {
         this.props.startCrawl(this.props.current_model)
 
     }
 
-    handleClick2 = function(){
+    handleClick2 = function () {
         this.props.killCrawl(this.props.current_model)
 
     }
-    render(){
-        return(
+
+    render() {
+        return (
             <div>
                 <H5>Start the Crawl</H5>
-                <Button disabled={!this.props.current_model || this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED} icon={"time"} text="Start Crawler" onClick={this.handleClick}/>
+                <Button
+                    disabled={!this.props.current_model || this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED}
+                    icon={"time"} text="Start Crawler" onClick={this.handleClick}/>
                 <br/>
-                <Button disabled={!this.props.current_model || !(this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED)} icon={"time"} text="Kill Crawl" onClick={this.handleClick2}/>
+                <Button
+                    disabled={!this.props.current_model || !(this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED)}
+                    icon={"time"} text="Kill Crawl" onClick={this.handleClick2}/>
 
             </div>
         )

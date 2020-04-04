@@ -11,13 +11,13 @@ class ExportData extends Component {
 
     }
 
-    handleClick2 = function(){
+    handleClick2 = function () {
         this.props.export(this.props.current_model)
 
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <Button icon={"export"} text="Export Data" onClick={this.handleClick2}/>
         )
     }

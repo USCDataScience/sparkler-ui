@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {AnchorButton, Button, H5} from "@blueprintjs/core";
 import SeedURLDialog from "../dialogs/SeedURLDialog";
 import {connect} from "react-redux";
@@ -18,16 +18,20 @@ class StartCrawl extends Component {
     }
 
     handleOpen = () => this.modalElement.current.handleOpen();
-    handleClick2 = function(){
+    handleClick2 = function () {
         this.props.killCrawl(this.props.current_model)
 
     }
-    render(){
-        return(
+
+    render() {
+        return (
             <div>
                 <H5>Create Seed File</H5>
-                <AnchorButton disabled={!this.props.current_model} icon={"import"} onClick={this.handleOpen} text="Start Crawl" />
-                <Button style={{marginLeft: "10px"}} disabled={!this.props.current_model || !(this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED)} icon={"time"} text="Kill Crawl" onClick={this.handleClick2}/>
+                <AnchorButton disabled={!this.props.current_model} icon={"import"} onClick={this.handleOpen}
+                              text="Start Crawl"/>
+                <Button style={{marginLeft: "10px"}}
+                        disabled={!this.props.current_model || !(this.props.crawl_status === CRAWL_STARTING || this.props.crawl_status === CRAWL_STARTED)}
+                        icon={"time"} text="Kill Crawl" onClick={this.handleClick2}/>
                 <StartCrawlDialog ref={this.modalElement}/>
             </div>
         )

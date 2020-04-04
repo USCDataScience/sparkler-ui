@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {AnchorButton, H5} from "@blueprintjs/core";
 import SeedURLDialog from "../dialogs/SeedURLDialog";
 import {connect} from "react-redux";
@@ -18,12 +18,13 @@ class CrawlConfig extends Component {
 
     handleOpen = () => this.modalElement.current.handleOpen();
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-            <H5>Crawler Configuration</H5>
-            <AnchorButton disabled={!this.props.current_model} icon={"import"} onClick={this.handleOpen} text="Crawler Configuration File" />
-            <CrawlConfigDialog ref={this.modalElement}/>
+                <H5>Crawler Configuration</H5>
+                <AnchorButton disabled={!this.props.current_model} icon={"import"} onClick={this.handleOpen}
+                              text="Crawler Configuration File"/>
+                <CrawlConfigDialog ref={this.modalElement}/>
             </div>
         )
     }
