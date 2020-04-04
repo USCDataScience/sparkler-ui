@@ -1,0 +1,12 @@
+language: ruby
+sudo: required
+services:
+  - docker
+
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build --pull -t uscdatascience/sparkler-ui:latest .
+  - docker push uscdatascience/sparkler-ui:latest
+
+script:
+  - echo "hello"
