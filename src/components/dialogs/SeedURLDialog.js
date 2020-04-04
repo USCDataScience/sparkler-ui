@@ -36,10 +36,10 @@ class SeedURLDialog extends Component {
 
     handleOkay() {
         this.props.saveSeedURLs(this.props.current_model, this.state.value)
+        this.handleClose()
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        debugger;
         if(nextProps.current_model !== undefined && nextProps.current_model !== this.props.current_model){
             this.props.fetchSeeds(nextProps.current_model);
             return true
@@ -49,6 +49,10 @@ class SeedURLDialog extends Component {
         }
         if(this.state.isOpen !== nextState.isOpen){
             return true;
+        }
+
+        if(nextState.value !== this.state.value){
+            return true
         }
     }
 
