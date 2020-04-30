@@ -168,8 +168,8 @@ export const saveSeedURLs = (model,urls) => {
         axios.post(env.API_URL+'/explorer-api/cmd/seed/upload/'+model, urls)
             .then(response => {
                 response = {
-                    type: types.UPDATE_SEED_URLS,
-                    payload: urls
+                    type: types.SEED_URLS_LIST,
+                    payload: response.data
 
                 }
                 dispatch(response)

@@ -40,11 +40,13 @@ class SeedURLDialog extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
+        debugger;
         if (nextProps.current_model !== undefined && nextProps.current_model !== this.props.current_model) {
             this.props.fetchSeeds(nextProps.current_model);
             return true
         }
         if (this.props.seeds !== nextProps.seeds) {
+            this.state.value = "";
             return true;
         }
         if (this.state.isOpen !== nextState.isOpen) {
@@ -54,6 +56,8 @@ class SeedURLDialog extends Component {
         if (nextState.value !== this.state.value) {
             return true
         }
+
+        return false
     }
 
 
