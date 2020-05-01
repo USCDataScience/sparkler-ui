@@ -55,7 +55,7 @@ class IFrameFrame extends Component {
                     <Row>
                         <Col sm={12}>
                             <a href={this.props.url} target="_blank"><H5
-                                className={this.props.skeleton ? Classes.SKELETON : ''}>Title: {this.state.title}</H5></a>
+                                className={this.props.skeleton ? Classes.SKELETON : ''}>Title: {this.props.title}</H5></a>
                             <a href={this.props.url} target="_blank"><H5
                                 style={{textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}
                                 className={this.props.skeleton ? Classes.SKELETON : ''}>URL: {this.props.url}</H5></a>

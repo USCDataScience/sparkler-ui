@@ -80,7 +80,6 @@ class Previews extends Component {
 //var marker = get_marker(jdata[i - 1]['label']);
     render_websites() {
         let arr = [];
-        debugger;
         let matrix = Previews.listToMatrix(this.props.websites, 3)
         console.log(matrix)
         for (let i = 0; i < matrix.length; i++) {

@@ -146,7 +146,7 @@ export const searchWebsites = (model, search_term) => {
         axios.get(env.API_URL+"/explorer-api/search/"+model+"/" + search_term)
             .then(response => {
                 let jdata = response.data;
-
+                console.log(jdata)
                 response = {
                     type: types.SEARCH_RESULTS,
                     payload: jdata

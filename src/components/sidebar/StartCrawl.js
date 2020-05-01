@@ -26,7 +26,7 @@ class StartCrawl extends Component {
     render() {
         return (
             <div>
-                <H5>Create Seed File</H5>
+                <H5>Run Crawl</H5>
                 <AnchorButton disabled={!this.props.current_model} icon={"import"} onClick={this.handleOpen}
                               text="Start Crawl"/>
                 <Button style={{marginLeft: "10px"}}
