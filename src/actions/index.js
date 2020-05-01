@@ -143,7 +143,7 @@ export const searchFired = (b) => ({
 
 export const searchWebsites = (model, search_term) => {
     return (dispatch) => {
-        axios.get(env.API_URL+"/search/"+model+"/" + search_term)
+        axios.get(env.API_URL+"/explorer-api/search/"+model+"/" + search_term)
             .then(response => {
                 let jdata = response.data;
 
